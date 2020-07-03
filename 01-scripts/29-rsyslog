@@ -1,0 +1,23 @@
+
+ 1 Configurar o rsyslog
+
+$ touch /etc/rsyslog.d/yta-script.conf
+
+================ yta-script.conf ===================
+#local0 à local7     /arquivo de log   
+local0.*             /var/log/yta-script.log
+local1.*             /var/log/yta-script.log
+local2.*             /var/log/outro-script.log
+==================================================
+
+$ touch /var/log/yta-script.log
+$ chown syslog:adm yta-script.log # mesma do arquivo syslog
+
+
+===============Script.sh=================
+
+ARQUIVO="/home/ytallo/Desktop/github/shell-script-codes/ytallo.txt"
+
+echo "Iniciando o Script...." | logger -p local0.warn -t [$0] # $0 nome do Script
+echo
+echo "Fim do Script...." | logger -p local0.warn -t [$0]
